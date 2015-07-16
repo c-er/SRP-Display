@@ -4,8 +4,12 @@
 	"private" : "true",
 	"description" : "UI for the SRP RFID project",
 	"dependencies" : {
-		"mysql" : "*",
+		"better-js-class": "*",
+        "cps": "*",
+        "mysql": "*",
+        "underscore": "*",
 		"mime" : "*",
-		"socket.io" : "*"
+		"socket.io" : "*",
+		"node-mysql" : "*"
 	}
 }
