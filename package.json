@@ -1,0 +1,11 @@
+{
+	"name" : "SRP-Display",
+	"version" : "0.0.1",
+	"private" : "true",
+	"description" : "UI for the SRP RFID project",
+	"dependencies" : {
+		"mysql" : "*",
+		"mime" : "*",
+		"socket.io" : "*"
+	}
+}
