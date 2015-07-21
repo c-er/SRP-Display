@@ -1,9 +1,9 @@
 var mysql = require("mysql");
-var http = require("http");
-var express = require("express");
 var hash = require("object-hash");
-var socketio = require("socket.io");
-var app = express();
+var express = require("express");
+var app = require("express")();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 var con = mysql.createConnection({
   host: "10.11.34.174",
@@ -21,28 +21,21 @@ var data = {};
 
 con.connect();
 
-app.get("/", function(req, res) {
-  res.sendFile(__dirname + "/../public/index.html");
-});
-
-var server = http.createServer(app);
-
-server.listen(3000, function() {
-	console.log("listening on port 3000");
-});
-
-var io = socketio(server);
+data["rows"] = [];
+data["hashCode"] = "";
 
 function updateData(query)
 {
 	con.query(query, function(err, rows, fields) {
-		console.log("called");
+		//console.log("called");
 		if(!err) {
 			cache["rows"] = rows;
 			cache["hashCode"] = hash.sha1(rows);
+			//console.log(cache);
 			if(cache["hashCode"] != data["hashCode"]) {
 				data = cache;
 				io.emit("data_change", data);
+				console.log("fired");
 			}
 		} else {
 			console.log("error getting data from database");
@@ -50,10 +43,9 @@ function updateData(query)
 	});
 }
 
-io.on("connection", function(socket) {
+io.on('connection', function(socket) {
 	console.log("connection received");
-	data["rows"] = [];
-	data["hashCode"] = "";
+	io.emit("data_change", data);
 	schedule = setInterval(updateData, 1000, "SELECT * from testtable");
 	socket.on("data_change", function(msg) {
 		console.log("Data: " + msg.rows);
@@ -61,17 +53,13 @@ io.on("connection", function(socket) {
 	});
 });
 
+app.get("/", function(req, res) {
+	console.log("get " + __dirname);
+	res.sendFile(__dirname + "/index.html");
+});
 
+http.listen(3000, function(){
+  	console.log('listening on *:3000');
+});
 
-
-
-/*con.query("SELECT * from testtable", function(err, rows, fields) {
-	if(!err) {
-		data = rows;
-		console.log(rows);
-	} else {
-		console.log("Error getting response");
-	}
-});*/
-
-con.end();
+//con.end();
