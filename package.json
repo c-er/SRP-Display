@@ -1,15 +1,12 @@
 {
-	"name" : "SRP-Display",
-	"version" : "0.0.1",
-	"private" : "true",
-	"description" : "UI for the SRP RFID project",
-	"dependencies" : {
-		"better-js-class": "*",
-        "cps": "*",
-        "mysql": "*",
-        "underscore": "*",
-		"mime" : "*",
-		"socket.io" : "*",
-		"node-mysql" : "*"
-	}
+  "name": "SRP-Display",
+  "version": "0.0.1",
+  "private": "true",
+  "description": "UI for the SRP RFID project",
+  "dependencies": {
+    "express": "^4.13.1",
+    "mysql": "^2.8.0",
+    "object-hash": "^0.8.0",
+    "socket.io": "^1.3.6"
+  }
 }
