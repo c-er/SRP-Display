@@ -28,8 +28,8 @@ var queries = {
 	mostRecent: "SELECT * FROM tagreads WHERE readtime = (SELECT MAX(readtime) FROM tagreads);",
 	all: "SELECT * FROM tagreads",
 	atTime: function(unixTime) {
-		return "SELECT * from tagreads where abs(UNIX_TIMESTAMP(readtime) - " + unixTime + ")=(
-				SELECT min(abs(" + unixTime + "-UNIX_TIMESTAMP(readtime))) from tagreads);";
+		return "SELECT * from tagreads where abs(UNIX_TIMESTAMP(readtime) - " + unixTime + ")=(" + 
+				"SELECT min(abs(" + unixTime + "-UNIX_TIMESTAMP(readtime))) from tagreads);";
 	}
 };
 
@@ -55,6 +55,7 @@ function dataNow()
 
 function clientSpecial(query, socket) {
 	var ret = {};
+	console.log(query);
 	con.query(query, function(err, rows, fields) {
 		//console.log("called");
 		if(!err) {
@@ -70,7 +71,18 @@ function clientSpecial(query, socket) {
 }
 
 function clientTime(time, socket) {
-
+	var ret = {};
+	con.query(queries.atTime(time), function(err, rows, fields) {
+		if(!err) {
+			ret["rows"] = rows;
+			ret["hashCode"] = hash.sha1(rows);
+			console.log("queried");
+		} else {
+			console.log("error getting data from database");
+			ret = null;
+		}
+		socket.emit("data_time", ret);
+	});
 }
 
 io.on('connection', function(socket) {

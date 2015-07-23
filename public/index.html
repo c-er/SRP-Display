@@ -14,24 +14,35 @@ Hi
 <script>
 	var socket = io();
 	//socket.join("now");
-	socket.on("data_change", function(msg) {
+	/*socket.on("data_change", function(msg) {
 		$("p").empty();
 		for(var i = 0; i < msg["rows"].length; i++)
 		{
 		  $("p").append(msg["rows"][i].tagid + " " + msg["rows"][i].tagvendor + " " + msg["rows"][i].channelid + " " + msg["rows"][i].channelvendor + " " + msg["rows"][i].readtime + " " + msg["rows"][i].ssi + "<br>");
 		}
 		$("p").append("Hash: " + msg["hashCode"] + "<br><br>");
-	});
+	});*/
 	
-	/*socket.emit("client_request", {query : "SELECT * from testtable"});
-	socket.on("client_response", function(msg) {
-		$("p").val("");
+	/*socket.emit("client_time", {time: Math.floor(new Date().getTime() / 1000)});
+	socket.on("data_time", function(msg) {
+		$("p").empty();
 		for(var i = 0; i < msg["rows"].length; i++)
 		{
-		  $("p").append(msg["rows"][i].id + " " + msg["rows"][i].thing + " " + msg["rows"][i].name + "<br>");
+		  $("p").append(msg["rows"][i].tagid + " " + msg["rows"][i].tagvendor + " " + msg["rows"][i].channelid + " " + msg["rows"][i].channelvendor + " " + msg["rows"][i].readtime + " " + msg["rows"][i].ssi + "<br>");
 		}
 		$("p").append("Hash: " + msg["hashCode"] + "<br><br>");
 	});*/
+	socket.emit("client_special", {query : "SELECT * from tagreads"});
+	socket.on("data_special", function(msg) {
+		$("p").val("");
+		var i;
+		for(i = 0; i < msg["rows"].length; i++)
+		{
+		  $("p").append(msg["rows"][i].tagid + " " + msg["rows"][i].tagvendor + " " + msg["rows"][i].channelid + " " + msg["rows"][i].channelvendor + " " + msg["rows"][i].readtime + " " + msg["rows"][i].ssi + "<br>");
+		}
+		$("p").append("Hash: " + msg["hashCode"] + "<br><br>");
+		$("p").append("Rows: " + i + "<br><br>");
+	});
 </script>
 </body>
 </html>
