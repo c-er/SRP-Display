@@ -15,3 +15,6 @@ Events emitted:
 data_now - emitted to all sockets each time the most recent data in the database changes (database is checked once per second)
 data_time - emitted to the socket that asks for the data that is closest to a given time
 data_special - emitted to the socket as the response when it asks for a special query
+
+# Tasks
+1) Need to implement mapping on home page - required and should happen first
