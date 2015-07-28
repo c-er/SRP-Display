@@ -4,69 +4,34 @@
 <meta charset="UTF-8">
 
 <!-- Links to scripts and stylesheets -->
-<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="../lib/jcanvas.min.js"></script>
 <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.1/material.indigo-pink.min.css">
 <script src="https://storage.googleapis.com/code.getmdl.io/1.0.1/material.min.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <style>
-body {
-	background-color: rgba(158, 158, 158, 0.2);
-}
-
-.mdl-layout__header-row {
-	background-color: rgba(140, 140, 140, 0.2);;
-}
-#home {
-	margin-left:200px;
-}
+* { margin:0; padding:0; } /* to remove the top and left whitespace */
+html, body { width:100%; height:100%; } /* just to be sure these are full screen*/
+canvas { display:block; } /* To remove the scrollbars */
 </style>
 
 <!-- Local script for dynamic content injection -->
-<script src="./dynamic.js"></script>
+<script src="./map.js"></script>
 
 <title>SRP-Display</title>
 
 </head>
 
+
 <body>
 
-<div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50 is-visible">
-        <!--<header class="demo-drawer-header">
-          <img src="images/user.jpg" class="demo-avatar">
-          <div class="demo-avatar-dropdown">
-            <span>hello@email.com</span>
-            <div class="mdl-layout-spacer"></div>
-            <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" data-upgraded=",MaterialButton,MaterialRipple">
-              <i class="material-icons">arrow_drop_down</i>
-            <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></button>
-            <div class="mdl-menu__container is-upgraded"><div class="mdl-menu__outline mdl-menu--bottom-right"></div><ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events" for="accbtn" data-upgraded=",MaterialMenu,MaterialRipple">
-              <button class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1" data-upgraded=",MaterialRipple">hello@email.com<span class="mdl-menu__item-ripple-container"><span class="mdl-ripple"></span></span></button>
-              <button class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1" data-upgraded=",MaterialRipple">info@domain.net<span class="mdl-menu__item-ripple-container"><span class="mdl-ripple"></span></span></button>
-              <button class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1" data-upgraded=",MaterialRipple">Add another account...<span class="mdl-menu__item-ripple-container"><span class="mdl-ripple"></span></span></button>
-            </ul></div>
-          </div>
-        </header>
-        <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">home</i>Map</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">inbox</i>Inbox</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">delete</i>Trash</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">report</i>Spam</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">forum</i>Forums</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">flag</i>Updates</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">local_offer</i>Promos</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">shopping_cart</i>Purchases</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">people</i>Social</a>
-          <div class="mdl-layout-spacer"></div>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons">help_outline</i></a>
-        </nav>-->
-      </div>
+<!--<p></p>-->
 
-<div class="mdl-layout__header-row">
-	<span id="home" class="mdl-layout-title mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Home</span>
-	<div class="mdl-layout-spacer"></div>
-	<span class="mdl-layout-title mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Map1</span>
-</div>
+<canvas id="map"></canvas>
+
+
+<script>test1();</script>
 </body>
 </html>
