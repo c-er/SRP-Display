@@ -32,27 +32,8 @@ function test1()
 			console.log("called");
 			layer.fillStyle="#f0f000";
 			$("canvas#map").drawLayers();
-			$("div#info").empty();
-			$("div#info").append("HELLO");
 		}
 	});
 	
-
-	$("canvas#map").drawRect({
-		layer: true,
-		draggable: false,
-		fillStyle: "#00ffff",
-		x: 500, y: 500,
-		width: 30,
-		height: 30,
-		click: function(layer)
-		{
-			console.log("called");
-			layer.fillStyle="#f0f000";
-			$("canvas#map").drawLayers();
-			$("div#info").empty();
-			$("div#info").append("Goodbye");
-		}
-	});
 }
 
