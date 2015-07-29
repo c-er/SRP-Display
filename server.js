@@ -25,7 +25,9 @@ data["rows"] = [];
 data["hashCode"] = "";
 
 var queries = {
-	mostRecent: "SELECT tagid, tagvendor, readtime, X(location), Y(location) FROM locations WHERE readtime = (SELECT MAX(readtime) FROM locations);",
+	mostRecent: "SELECT shelteree.*, X(locations.location) AS \"X Coordinate\", Y(locations.location) AS \"Y Coordinate\" " +
+"FROM locations INNER JOIN shelteree " +
+"WHERE shelteree.tagid = locations.tagid AND shelteree.tagvendor = locations.tagvendor;",
 	all: "SELECT * FROM tagreads",
 	atTime: function(unixTime) {
 		return "SELECT * from tagreads where abs(UNIX_TIMESTAMP(readtime) - " + unixTime + ")=(" + 
