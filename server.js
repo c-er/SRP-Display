@@ -25,7 +25,7 @@ data["rows"] = [];
 data["hashCode"] = "";
 
 var queries = {
-	mostRecent: "SELECT * FROM tagreads WHERE readtime = (SELECT MAX(readtime) FROM tagreads);",
+	mostRecent: "SELECT tagid, tagvendor, readtime, X(location), Y(location) FROM locations WHERE readtime = (SELECT MAX(readtime) FROM locations);",
 	all: "SELECT * FROM tagreads",
 	atTime: function(unixTime) {
 		return "SELECT * from tagreads where abs(UNIX_TIMESTAMP(readtime) - " + unixTime + ")=(" + 
