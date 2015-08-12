@@ -25,9 +25,7 @@ data["rows"] = [];
 data["hashCode"] = "";
 
 var queries = {
-	mostRecent: "SELECT shelteree.*, X(locations.location) AS \"X Coordinate\", Y(locations.location) AS \"Y Coordinate\" " +
-"FROM locations INNER JOIN shelteree " +
-"WHERE shelteree.tagid = locations.tagid AND shelteree.tagvendor = locations.tagvendor;",
+	mostRecent: "SELECT b.*, a.readtime, X(a.location) AS \"X Coordinate\", Y(a.location) AS \"Y Coordinate\"  FROM locations a INNER JOIN shelteree b ON b.tagid = a.tagid AND b.tagvendor = a.tagvendor AND a.readtime = (SELECT MAX(readtime) FROM locations WHERE tagid=a.tagid);",
 	all: "SELECT * FROM tagreads",
 	atTime: function(unixTime) {
 		return "SELECT * from tagreads where abs(UNIX_TIMESTAMP(readtime) - " + unixTime + ")=(" + 
@@ -43,6 +41,7 @@ function dataNow()
 	cache = {};
 	con.query(queries.mostRecent, function(err, rows, fields) {
 		if(!err) {
+			//console.log(rows);
 			cache["rows"] = rows;
 			cache["hashCode"] = hash.sha1(rows);
 			if(cache["hashCode"] != data["hashCode"]) {
